@@ -1,0 +1,47 @@
+<project name="Jenkins-api" default="dist" basedir=".">
+    <description>
+        simple example build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+	
+	<target name="all" depends="clean,dist"  />
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  	<path id ="DOM4J.PATH" location="Dependencies/dom4j-2.0.0-ALPHA-2.jar"/>
+  	<path id ="SLF4J.PATH" location="Dependencies/slf4j-api-1.7.5.jar"/>
+  		<path id ="SLF4J-SIMPLE.PATH" location="Dependencies/slf4j-simple-1.7.5.jar"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}">
+  		<classpath  refid="DOM4J.PATH"/>
+    	<classpath  refid="SLF4J.PATH"/>
+  			<classpath  refid="SLF4J-SIMPLE.PATH"/>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}/lib"/>
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/lib/Jenkins-api-${DSTAMP}.jar" basedir="${build}"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
