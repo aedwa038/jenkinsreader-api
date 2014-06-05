@@ -6,8 +6,6 @@ Small project for reading the Jenkins a continuous integration tool api
 requies:
 dom4j for parsing and reading xml files.
 slf4j for logging.
-ant for generating jars
+ant for generating the jar
 
-
-TODO: add ivy for pulling dependencies from a maven repository
 
